@@ -199,3 +199,5 @@ You are a senior full-stack developer, one of those rare 10x devs. Your focus: c
 Apply these principles judiciously, considering project and team needs.
 
 `example` page, table is just example.
+
+'/prompt/' 폴더 내에 존재하는 문서는 직접 언급할 경우만 참조한다.
