@@ -1,8 +1,9 @@
 import type { HomeScreenState, HomeScreenAction } from './types';
+import { DEFAULT_LOCATION } from '@/constants/location';
 
 export const initialState: HomeScreenState = {
   currentLocation: null,
-  mapCenter: { lat: 37.5665, lng: 126.978 },
+  mapCenter: DEFAULT_LOCATION,
   zoomLevel: 13,
   mapLoading: false,
   locationPermission: 'prompt',

@@ -6,6 +6,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getCurrentPosition } from '@/lib/location/geolocation';
+import { DEFAULT_LOCATION } from '@/constants/location';
 import { HomeScreenProvider, useHomeScreenContext } from '@/features/home/context/HomeScreenContext';
 import { NaverMapContainer } from '@/features/home/components/NaverMapContainer';
 import { CurrentLocationMarker } from '@/features/home/components/CurrentLocationMarker';
@@ -44,8 +45,10 @@ function HomePageContent() {
         setMapCenter(location);
         setLocationPermission('granted');
       })
-      .catch((error) => {
-        console.error('Failed to get current location:', error);
+      .catch(() => {
+        // 현재 위치를 찾을 수 없는 경우 조용히 기본 위치(강남역) 사용
+        setCurrentLocation(null);
+        setMapCenter(DEFAULT_LOCATION);
         setLocationPermission('denied');
       })
       .finally(() => {
@@ -120,11 +123,12 @@ function HomePageContent() {
 
       <SearchResultsModal />
 
-      {state.locationPermission === 'denied' && (
+      {state.locationPermission === 'denied' && !state.currentLocation && (
         <Alert className="absolute bottom-4 left-4 right-4 z-10">
-          <AlertTitle>위치 권한이 거부되었습니다</AlertTitle>
+          <AlertTitle>기본 위치로 설정되었습니다</AlertTitle>
           <AlertDescription>
-            현재 위치를 사용하려면 브라우저 설정에서 위치 권한을 허용해주세요.
+            현재 위치를 사용할 수 없어 서울시 강남역을 기준으로 표시합니다. 
+            정확한 위치를 사용하려면 브라우저 설정에서 위치 권한을 허용해주세요.
           </AlertDescription>
         </Alert>
       )}
