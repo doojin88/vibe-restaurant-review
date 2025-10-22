@@ -57,11 +57,11 @@ function SearchPageContent() {
     router.back();
   };
 
-  const handlePlaceCardClick = (place: { id: string }) => {
+  const handlePlaceCardClick = (place: any) => {
     router.push(`/place/${place.id}`);
   };
 
-  const handleReviewClick = (place: { id: string }) => {
+  const handleReviewClick = (place: any) => {
     router.push(`/place/${place.id}/review`);
   };
 

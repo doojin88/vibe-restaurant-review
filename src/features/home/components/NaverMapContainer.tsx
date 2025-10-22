@@ -31,33 +31,28 @@ export function NaverMapContainer({
       zoom,
     });
 
-    const centerListener = naver.maps.Event.addListener(
-      newMap,
-      'center_changed',
-      function () {
-        const newCenter = newMap.getCenter();
-        onCenterChanged?.({
-          lat: newCenter.lat(),
-          lng: newCenter.lng(),
-        });
-      }
-    );
+    const centerListener = function () {
+      const newCenter = newMap.getCenter();
+      onCenterChanged?.({
+        lat: newCenter.lat(),
+        lng: newCenter.lng(),
+      });
+    };
 
-    const zoomListener = naver.maps.Event.addListener(
-      newMap,
-      'zoom_changed',
-      function () {
-        const newZoom = newMap.getZoom();
-        onZoomChanged?.(newZoom);
-      }
-    );
+    const zoomListener = function () {
+      const newZoom = newMap.getZoom();
+      onZoomChanged?.(newZoom);
+    };
+
+    naver.maps.Event.addListener(newMap, 'center_changed', centerListener);
+    naver.maps.Event.addListener(newMap, 'zoom_changed', zoomListener);
 
     setMap(newMap);
     onMapLoad?.(newMap);
 
     return () => {
-      naver.maps.Event.removeListener(centerListener);
-      naver.maps.Event.removeListener(zoomListener);
+      naver.maps.Event.removeListener(newMap, 'center_changed', centerListener);
+      naver.maps.Event.removeListener(newMap, 'zoom_changed', zoomListener);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

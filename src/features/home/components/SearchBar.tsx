@@ -27,7 +27,7 @@ export function SearchBar() {
       <div className="flex gap-2">
         <Input
           type="text"
-          placeholder="¥Œ…D €ÉX8”"
+          placeholder="ë§›ì§‘ì„ ê²€ìƒ‰í•´ë³´ì„¸ìš”"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}

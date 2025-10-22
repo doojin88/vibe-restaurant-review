@@ -18,7 +18,7 @@ export function CurrentLocationMarker({
       map={map}
       position={location}
       icon={{
-        content: '<div class="current-location-marker">=Õ</div>',
+        content: '<div class="current-location-marker">üìç</div>',
         size: { width: 30, height: 30 },
         anchor: { x: 15, y: 15 },
       }}

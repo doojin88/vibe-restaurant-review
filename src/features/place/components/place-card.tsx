@@ -8,8 +8,8 @@ import type { Place } from '../lib/dto';
 
 interface PlaceCardProps {
   place: Place;
-  onCardClick?: (place: { id: string }) => void;
-  onReviewClick?: (place: { id: string }) => void;
+  onCardClick?: (place: Place) => void;
+  onReviewClick?: (place: Place) => void;
   averageRating?: number;
   reviewCount?: number;
   showReviewButton?: boolean;

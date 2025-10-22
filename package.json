@@ -44,6 +44,7 @@
     "react-use": "^17",
     "server-only": "0.0.1",
     "ts-pattern": "^5",
+    "use-debounce": "^10.0.6",
     "zod": "^3",
     "zustand": "^4"
   },
