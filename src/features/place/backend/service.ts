@@ -2,6 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { success, failure } from '@/backend/http/response';
 import { PlaceErrorCode } from './error';
 import type { GetNearbyPlacesQuery, SearchPlacesQuery } from './schema';
+import { NaverSearchService } from './naver-search-service';
 
 export const PlaceService = {
   /**
@@ -121,64 +122,33 @@ export const PlaceService = {
   },
 
   /**
-   * 키워드로 장소 검색
+   * 키워드로 장소 검색 (네이버 API만 사용)
    */
-  async searchPlaces(supabase: SupabaseClient, query: SearchPlacesQuery) {
-    const { q, page, limit } = query;
-    const offset = (page - 1) * limit;
+  async searchPlaces(supabase: SupabaseClient, query: SearchPlacesQuery, config?: { naver: { clientId: string; clientSecret: string } }) {
+    const { q: searchQuery, page = 1, limit = 10 } = query;
 
-    const { count, error: countError } = await supabase
-      .from('places')
-      .select('*', { count: 'exact', head: true })
-      .ilike('name', `%${q}%`);
+    // 네이버 API 파라미터 변환: q -> query, page -> start, limit -> display
+    const start = page; // 네이버 API는 1-based 시작
+    const display = limit;
 
-    if (countError) {
-      console.error('Count query error:', countError);
-      return failure(500, PlaceErrorCode.SEARCH_FAILED, '검색 중 오류가 발생했습니다.');
+    // 네이버 지역 검색 API 호출
+    const naverResult = await NaverSearchService.searchPlaces(
+      searchQuery,
+      display,
+      start,
+      'random',
+      config?.naver
+    );
+
+    if (!naverResult.ok) {
+      return naverResult;
     }
-
-    const total = count ?? 0;
-
-    const { data, error } = await supabase
-      .from('places')
-      .select('*')
-      .ilike('name', `%${q}%`)
-      .order('name')
-      .range(offset, offset + limit - 1);
-
-    if (error) {
-      console.error('Search query error:', error);
-      return failure(500, PlaceErrorCode.SEARCH_FAILED, '검색 중 오류가 발생했습니다.');
-    }
-
-    if (!data) {
-      return failure(500, PlaceErrorCode.FETCH_FAILED, '검색 결과 조회에 실패했습니다.');
-    }
-
-    const places = (data as unknown as Array<{
-      id: string;
-      name: string;
-      address: string;
-      category: string;
-      latitude: number;
-      longitude: number;
-      created_at: string;
-    }>).map((place) => ({
-      id: place.id,
-      name: place.name,
-      address: place.address,
-      category: place.category,
-      latitude: Number(place.latitude),
-      longitude: Number(place.longitude),
-      created_at: place.created_at,
-    }));
-
-    const hasMore = total > offset + limit;
 
     return success({
-      places,
-      total,
-      hasMore,
+      places: naverResult.data.places,
+      total: naverResult.data.total,
+      hasMore: naverResult.data.hasMore,
+      source: 'naver',
     });
   },
 };

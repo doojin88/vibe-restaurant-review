@@ -2,6 +2,26 @@
 
 ## Getting Started
 
+### 환경 변수 설정
+
+프로젝트 루트에 `.env.local` 파일을 생성하고 다음 환경 변수를 설정하세요:
+
+```bash
+# Supabase 설정
+SUPABASE_URL=your_supabase_url
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+
+# 네이버 API 설정 (지역 검색용)
+NEXT_PUBLIC_NAVER_CLIENT_ID=your_naver_client_id
+NEXT_PUBLIC_NAVER_CLIENT_SECRET=your_naver_client_secret
+
+# 네이버 API 설정 (지도 연동용)
+NEXT_PUBLIC_NAVER_MAP_CLIENT_ID=your_naver_map_client_id
+NEXT_PUBLIC_NAVER_MAP_CLIENT_SECRET=your_naver_map_client_secret
+```
+
+### 개발 서버 실행
+
 개발 서버를 실행합니다.<br/>
 환경에 따른 명령어를 사용해주세요.
 

@@ -37,3 +37,11 @@ agent prd-writer 를 이용하여 prd 작성한다.
 이들은 모두 병렬로 실행되어야한다.
 
 ```
+
+### 장소 검색 
+
+```
+장소 검색 페이지는 데이터베이스를 검색하지 않고 네이버 지역 검색 API (search/local) 만 사용해서 표시한다.
+
+아래 두가지 네이버 연동 관련 환경변수가 존재한다. NEXT_PUBLIC_NAVER_MAP_CLIENT_ID 은 네이버 지도 연동에 사용되고, NEXT_PUBLIC_NAVER_CLIENT_ID 는 네이버 지역 검색에 사용된다.
+```

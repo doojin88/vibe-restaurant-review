@@ -39,7 +39,8 @@ export function registerPlaceRoutes(app: Hono<AppEnv>) {
 
       logger.info('Searching places with query:', query);
 
-      const result = await PlaceService.searchPlaces(supabase, query);
+      const config = c.get('config');
+      const result = await PlaceService.searchPlaces(supabase, query, config);
 
       if (!result.ok) {
         return c.json({ ok: false, error: (result as any).error }, result.status);
