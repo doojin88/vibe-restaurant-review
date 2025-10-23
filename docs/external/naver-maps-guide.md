@@ -42,6 +42,11 @@
    NEXT_PUBLIC_NAVER_MAP_CLIENT_ID=your-client-id
    ```
 
+4. API request CLIENT ID 설정 
+    ```
+    ncpKeyId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}
+    ```
+
 ### 1.2 프로젝트 설정
 
 #### Next.js 프로젝트에 스크립트 추가

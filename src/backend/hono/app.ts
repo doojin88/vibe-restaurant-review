@@ -7,24 +7,21 @@ import { registerPlaceRoutes } from '@/features/place/backend/route';
 import { registerReviewRoutes } from '@/features/review/backend/route';
 import type { AppEnv } from '@/backend/hono/context';
 
-let singletonApp: Hono<AppEnv> | null = null;
-
 export const createHonoApp = () => {
-  if (singletonApp) {
-    return singletonApp;
-  }
-
   const app = new Hono<AppEnv>();
 
   app.use('*', errorBoundary());
   app.use('*', withAppContext());
   app.use('*', withSupabase());
 
+  // 테스트 엔드포인트 추가
+  app.get('/test', (c) => {
+    return c.json({ message: 'Hono app is working!' });
+  });
+
   registerExampleRoutes(app);
   registerPlaceRoutes(app);
   registerReviewRoutes(app);
-
-  singletonApp = app;
 
   return app;
 };

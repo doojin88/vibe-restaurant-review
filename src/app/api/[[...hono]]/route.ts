@@ -11,3 +11,6 @@ export const DELETE = handle(app);
 export const OPTIONS = handle(app);
 
 export const runtime = 'nodejs';
+
+// 디버깅을 위한 로그 추가
+console.log('Hono app routes:', app.routes);
