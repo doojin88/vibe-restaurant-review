@@ -62,7 +62,7 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <Script
-          src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
+          src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
           strategy="beforeInteractive"
         />
       </head>
@@ -77,7 +77,7 @@ export default function RootLayout({
 ```html
 <script
   type="text/javascript"
-  src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID"
+  src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=YOUR_CLIENT_ID"
 ></script>
 ```
 
@@ -708,7 +708,7 @@ export default function HomePage() {
 
 - **2025년 AI NAVER API 변경**: 지도 API 신규 이용 신청 차단 및 무료 이용량 제공 중단 예정
 - **네이버 클라우드 플랫폼으로 이전**: 새로운 프로젝트는 네이버 클라우드 플랫폼의 Maps API를 사용해야 함
-- **인증 방식**: 네이버 클라우드 플랫폼 키 ID (ncpClientId) 방식 사용
+- **인증 방식**: 네이버 클라우드 플랫폼 키 ID (ncpKeyId) 방식 사용
 
 ---
 

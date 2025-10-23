@@ -223,7 +223,7 @@
 2. `public/index.html` 또는 `src/app/layout.tsx`에 스크립트 추가
    ```typescript
    <Script
-     src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
+     src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
      strategy="beforeInteractive"
    />
    ```

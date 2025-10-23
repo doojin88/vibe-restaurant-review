@@ -24,7 +24,18 @@ export function NaverMapContainer({
   const [map, setMap] = useState<naver.maps.Map | null>(null);
 
   useEffect(() => {
-    if (!mapRef.current || !window.naver || map) return;
+    if (!mapRef.current || map) return;
+    
+    // 네이버 지도 API 로딩 확인
+    if (!window.naver) {
+      console.error('네이버 지도 API가 로드되지 않았습니다. 클라이언트 ID를 확인해주세요.');
+      return;
+    }
+    
+    if (!window.naver.maps) {
+      console.error('네이버 지도 API의 maps 모듈이 로드되지 않았습니다.');
+      return;
+    }
 
     const newMap = createNaverMap(mapRef.current, {
       center,

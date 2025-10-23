@@ -1,5 +1,8 @@
 ## 네이버 지도 API 연동
 
+- 최신 변경 사항 확인 
+  - https://navermaps.github.io/maps.js.ncp/docs/tutorial-2-Getting-Started.html
+
 - 네이버 지도 기본 예제
   - https://navermaps.github.io/maps.js.ncp/docs/tutorial-1-map-simple.example.html
 - 네이버 지도 옵션 조정하기
